@@ -1,33 +1,35 @@
 package challenge.models;
 
 import java.sql.Time;
+import java.time.LocalTime;
+
 
 public class WorkingHours {
-    private Time entryTime;
-    private Time departureTime;
-    private Time lunchEntryTime;
-    private Time lunchDepartureTime;
+    private LocalTime entryTime;
+    private LocalTime departureTime;
+    private LocalTime lunchEntryTime;
+    private LocalTime lunchDepartureTime;
 
-    public WorkingHours(Time et, Time dt, Time let, Time ldt){
+    public WorkingHours(LocalTime et, LocalTime dt, LocalTime let, LocalTime ldt){
         this.entryTime = et;
         this.departureTime = dt;
         this.lunchEntryTime = let;
         this.lunchDepartureTime = ldt;
     }
 
-    public Time getEntryTime(){
+    public LocalTime getEntryTime(){
         return this.entryTime;
     }
 
-    public Time getDepartureTime(){
+    public LocalTime getDepartureTime(){
         return this.departureTime;
     }
 
-    public Time getLunchEntryTime(){
+    public LocalTime getLunchEntryTime(){
         return this.lunchEntryTime;
     }
 
-    public Time getLunchDepartureTime(){
+    public LocalTime getLunchDepartureTime(){
         return this.lunchDepartureTime;
     }
 

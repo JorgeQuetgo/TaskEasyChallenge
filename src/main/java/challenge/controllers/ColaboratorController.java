@@ -6,6 +6,7 @@ import challenge.models.WorkingHours;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Time;
@@ -15,30 +16,62 @@ import java.util.Map;
 @RestController
 public class ColaboratorController {
 
-    private List<Colaborator> colaborators = new ArrayList<Colaborator>();
+    private List<Colaborator> collaborators = new ArrayList<Colaborator>();
+    private WorkingHours workingHours;
+    private List<String> freeCollaborators = new ArrayList<>();
+    private static final int MEETING_TIME = 30;
 
     @GetMapping("/greeting")
     public Colaborator greeting() {
-        List<Time> timeList = new ArrayList<Time>();
-        timeList.add(java.sql.Time.valueOf("08:00:00"));
+        List<LocalTime> timeList = new ArrayList<>();
+        timeList.add(LocalTime.parse("08:00:00"));
         Colaborator newC = new Colaborator("Juan", timeList);
-        colaborators.add(newC);
+        collaborators.add(newC);
         return (newC);
     }
 
-    @GetMapping("/colaborators")
+    @GetMapping("/collaborators")
     public List<Colaborator> getAllColaborator(){
-        //List<Time> timeList = new ArrayList<Time>();
-        //timeList.add(java.sql.Time.valueOf("8:00:00"));
-        //colaborators.add(new Colaborator("Pedro", timeList));
-        //colaborators.add(new Colaborator("Miguel", timeList));
-        return colaborators;
+        return collaborators;
     }
 
-    @PostMapping("/initialize")
-    public void initialize(@RequestBody List<Colaborator> colaborators){
-        this.colaborators = colaborators;
-        System.out.println(this.colaborators);
+    @PostMapping("/initialize_collaborators")
+    public void initializeCollaboratros(@RequestBody List<Colaborator> collaborators){
+        this.collaborators = collaborators;
+    }
+
+
+    @GetMapping("/working_hours")
+    public WorkingHours getWorkingHours(){
+        return workingHours;
+    }
+
+    @PostMapping("/initialize_working_hours")
+    public void initializeWorkingHours(@RequestBody WorkingHours workingHours){
+        this.workingHours = workingHours;
+    }
+
+
+    @PostMapping("/retrieve_free_collaborators")
+    public List<String> retrieveFreeCollaborators(@RequestBody Map<String, LocalTime> time){
+        freeCollaborators.clear();
+        LocalTime testingTime = time.get("time");
+        System.out.println(testingTime);
+        for (int i = 0; i < collaborators.size(); i++) {
+            System.out.println(collaborators.get(i).getName());
+            collaborators.get(i).setFreeSchedule(workingHours, MEETING_TIME);
+            System.out.println(collaborators.get(i).getFreeSchedule());
+            if (collaborators.get(i).getFreeSchedule().contains(testingTime)){
+                freeCollaborators.add(collaborators.get(i).getName());
+            }
+        }
+        if (freeCollaborators.size() >= 3){
+            return freeCollaborators;
+        }else{
+            List<String> listStrings = new ArrayList<String>();
+            listStrings.add("less than three people are available");
+            return listStrings;
+        }
     }
 }
 
