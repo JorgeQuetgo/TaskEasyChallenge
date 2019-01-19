@@ -26,6 +26,7 @@ public class Colaborator {
         return this.meetingSchedule;
     }
 
+    // insert in the field free Schedule all available schedules of the collaborator
     public void setFreeSchedule(WorkingHours wkh, Integer meetingTime){
         List<LocalTime> list = new ArrayList<>();
         LocalTime freeTime = wkh.getEntryTime();
