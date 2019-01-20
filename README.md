@@ -19,31 +19,31 @@ I made the challenge in Java with Spring boot, building a  RESTful Web Service
 ####data:
 ```json 
 [
-  	{
-  		"name": "Kyle",
-  		"meetingSchedule": ["13:30:00", "14:30:00", "18:00"]
-  	},
-  	{
-  		"name": "Paul",
-  		"meetingSchedule": ["07:00:00", "09:00:00", "13:30:00", "15:00:00", "15:30:00"]		
-  	},
-  	{
-  		"name": "Alex",
-  		"meetingSchedule": ["08:00:00", "09:30:00", "13:30:00", "15:00:00"]
-  	},
-  	{
-  		"name": "Luis",
-  		"meetingSchedule": ["09:00:00", "13:30:00", "15:00:00", "15:30:00"]		
-  	},
-  	{
-  		"name": "Jairo",
-  		"meetingSchedule": ["08:00:00", "09:00:00", "18:00:00"]
-  	},
-  	{
-  		"name": "Sonya",
-  		"meetingSchedule": ["08:00:00", "12:30:00", "13:30:00", "15:30:00"]		
-  	}
-  ] 
+	{
+		"name": "Kyle",
+		"meetingSchedule": ["13:30:00", "14:30:00", "18:00"]
+	},
+	{
+		"name": "Paul",
+		"meetingSchedule": ["07:00:00", "09:00:00", "13:30:00", "15:00:00", "15:30:00"]		
+	},
+	{
+		"name": "Alex",
+		"meetingSchedule": ["08:00:00", "09:30:00", "12:30:00", "15:00:00"]
+	},
+	{
+		"name": "Luis",
+		"meetingSchedule": ["09:00:00", "13:30:00", "15:00:00", "15:30:00"]		
+	},
+	{
+		"name": "Jairo",
+		"meetingSchedule": ["08:00:00", "09:00:00", "18:00:00"]
+	},
+	{
+		"name": "Sonya",
+		"meetingSchedule": ["08:00:00", "12:30:00", "13:30:00", "15:30:00"]		
+	}
+] 
 ```
 
 ### get data from collaborators:
@@ -81,7 +81,7 @@ enter as input the time to verify
 	"time": "08:30:00"
 }
 ```
-return:
+#### return:
 at least three people are available
 
 example:
@@ -95,4 +95,30 @@ example:
     "Sonya"
 ]
 ```
+
+## test all time :
+enter as input the time to verify
+* GET 
+* link: `http://domain:port/get_all_free_time`
+
+
+#### return:
+ All the times when at least three people are available and who those people are
+
+### Note:
+All the times are in 24 hour format.
+
+
+### Jar
+
+* Location: 
+`TaskEasyChallenge/classes/artifacts/challenge_jar`
+* Execute:
+`java -cp challenge.jar challenge.ChallengeApplication`
+
+
+
+
+
+
 
